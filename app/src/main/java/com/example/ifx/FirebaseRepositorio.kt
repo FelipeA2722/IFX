@@ -61,6 +61,26 @@ class FirebaseRepository {
             .addOnSuccessListener { onSucesso() }
             .addOnFailureListener { e -> onErro(e.message ?: "Erro ao salvar perfil") }
     }
+    // Busca os dados do usuário atual no Firestore
+    fun buscarPerfilUsuario(onSucesso: (Map<String, Any>?) -> Unit, onErro: (String) -> Unit) {
+        val uid = usuarioAtualId ?: return onErro("Usuário não logado")
+
+        db.collection("usuarios").document(uid)
+            .get()
+            .addOnSuccessListener { document ->
+                if (document.exists()) {
+                    onSucesso(document.data)
+                } else {
+                    onErro("Perfil não encontrado")
+                }
+            }
+            .addOnFailureListener { e -> onErro(e.message ?: "Erro ao buscar perfil") }
+    }
+
+    // Desloga o usuário do Firebase
+    fun deslogar() {
+        auth.signOut()
+    }
 
     // ==========================================
     // 2. CRUD DE ANÚNCIOS

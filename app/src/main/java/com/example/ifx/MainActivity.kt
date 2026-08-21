@@ -19,6 +19,7 @@ class MainActivity : androidx.activity.ComponentActivity() {
         // Referência dos elementos da tela
         val tvBoasVindas = findViewById<TextView>(R.id.tvBoasVindas)
         val btnSair = findViewById<Button>(R.id.btnSair)
+        val btnPerfil = findViewById<Button>(R.id.btnPerfil)
 
         // Configuração do botão de Logout (opcional)
         btnSair.setOnClickListener {
@@ -31,6 +32,10 @@ class MainActivity : androidx.activity.ComponentActivity() {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
+        }
+        btnPerfil.setOnClickListener {
+            val intent = Intent(this, PerfilActivity::class.java)
+            startActivity(intent)
         }
     }
 }
