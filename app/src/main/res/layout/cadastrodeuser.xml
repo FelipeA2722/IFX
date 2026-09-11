@@ -8,35 +8,37 @@
     android:padding="24dp">
 
     <TextView
-        android:id="@+id/tvTitulo"
+        android:id="@+id/tvTituloCadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
-        android:text="IFX"
+        android:layout_marginTop="32dp"
+        android:text="Criar Conta"
         android:textColor="#1F2A44"
-        android:textSize="38sp"
+        android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tvSubtitulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Acesse sua conta para continuar"
-        android:textColor="#5B6476"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTitulo" />
-
     <EditText
-        android:id="@+id/etEmail"
+        android:id="@+id/etNomeCadastro"
         android:layout_width="0dp"
         android:layout_height="56dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/bg_input"
+        android:hint="Nome Completo"
+        android:inputType="textPersonName"
+        android:paddingHorizontal="16dp"
+        android:textColor="#1F2A44"
+        android:textColorHint="#8C96A8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTituloCadastro" />
+
+    <EditText
+        android:id="@+id/etEmailCadastro"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/bg_input"
         android:hint="E-mail"
         android:inputType="textEmailAddress"
@@ -45,50 +47,51 @@
         android:textColorHint="#8C96A8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvSubtitulo" />
+        app:layout_constraintTop_toBottomOf="@id/etNomeCadastro" />
 
     <EditText
-        android:id="@+id/etSenha"
+        android:id="@+id/etSenhaCadastro"
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/bg_input"
-        android:hint="Senha"
+        android:hint="Senha (mínimo 6)"
         android:inputType="textPassword"
         android:paddingHorizontal="16dp"
         android:textColor="#1F2A44"
         android:textColorHint="#8C96A8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etEmail" />
+        app:layout_constraintTop_toBottomOf="@id/etEmailCadastro" />
+
+    <EditText
+        android:id="@+id/etFotoUrlCadastro"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_input"
+        android:hint="URL da Foto de Perfil"
+        android:inputType="textUri"
+        android:paddingHorizontal="16dp"
+        android:textColor="#1F2A44"
+        android:textColorHint="#8C96A8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etSenhaCadastro" />
 
     <Button
-        android:id="@+id/btnEntrar"
+        android:id="@+id/btnCadastrarUsuario"
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/bg_button_primary"
-        android:text="Entrar"
+        android:text="Cadastrar"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etSenha" />
-
-    <TextView
-        android:id="@+id/tvIrParaCadastro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:padding="8dp"
-        android:text="Não tem uma conta? Cadastre-se"
-        android:textColor="#1E88E5"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnEntrar" />
+        app:layout_constraintTop_toBottomOf="@id/etFotoUrlCadastro" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
