@@ -6,10 +6,10 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.ComponentActivity
 import coil.load
 
-class PerfilActivity : androidx.activity.ComponentActivity() {
+class PerfilActivity : ComponentActivity() {
 
     private val firebaseRepo = FirebaseRepository()
 
@@ -17,33 +17,26 @@ class PerfilActivity : androidx.activity.ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_perfil)
 
-        val imgFotoPerfil = findViewById<ImageView>(R.id.imgFotoPerfil)
-        val tvNomePerfil = findViewById<TextView>(R.id.tvNomePerfil)
-        val tvEmailPerfil = findViewById<TextView>(R.id.tvEmailPerfil)
-        val btnSair = findViewById<Button>(R.id.btnSair)
-        val btnMeusAnuncios = findViewById<Button>(R.id.btnPerfilMeusAnuncios)
+        val imgFoto = findViewById<ImageView>(R.id.imgPerfilFoto)
+        val tvNome = findViewById<TextView>(R.id.tvPerfilNome)
+        val tvEmail = findViewById<TextView>(R.id.tvPerfilEmail)
+        val btnMeusFavoritos = findViewById<Button>(R.id.btnMeusFavoritos)
+        val btnDeslogar = findViewById<Button>(R.id.btnDeslogar)
+        val btnVoltar = findViewById<Button>(R.id.btnVoltarPerfil)
 
-        btnMeusAnuncios.setOnClickListener {
-            startActivity(Intent(this, MeusAnunciosActivity::class.java))
-        }
-
+        // Carrega as informações do usuário
         firebaseRepo.buscarPerfilUsuario(
             onSucesso = { dados ->
-                val nome = dados?.get("nome") as? String ?: "Sem nome"
-                val email = dados?.get("email") as? String ?: ""
-                // 1. Pegamos a URL da foto salva no Firestore
-                val fotoUrl = dados?.get("fotoUrl") as? String ?: ""
+                if (dados != null) {
+                    tvNome.text = dados["nome"] as? String ?: "Sem nome"
+                    tvEmail.text = dados["email"] as? String ?: "Sem e-mail"
+                    val fotoUrl = (dados["fotoUrl"] as? String)?.trim() ?: ""
 
-                tvNomePerfil.text = nome
-                tvEmailPerfil.text = email
-
-                // 2. Carregamos a foto na ImageView usando o Coil
-                imgFotoPerfil.load(fotoUrl.ifEmpty { null }) {
-                    crossfade(true)
-                    // Imagem padrão enquanto carrega ou se o link estiver vazio/com erro
-                    placeholder(android.R.drawable.ic_menu_gallery)
-                    error(android.R.drawable.ic_menu_report_image)
-                    fallback(android.R.drawable.ic_menu_report_image)
+                    imgFoto.load(fotoUrl.ifEmpty { null }) {
+                        crossfade(true)
+                        placeholder(android.R.drawable.ic_menu_gallery)
+                        error(android.R.drawable.ic_menu_report_image)
+                    }
                 }
             },
             onErro = { mensagem ->
@@ -51,12 +44,22 @@ class PerfilActivity : androidx.activity.ComponentActivity() {
             }
         )
 
-        // Botão para deslogar
-        btnSair.setOnClickListener {
+        // Navegação para Meus Favoritos
+        btnMeusFavoritos.setOnClickListener {
+            startActivity(Intent(this, FavoritosActivity::class.java))
+        }
+
+        // Logout do app
+        btnDeslogar.setOnClickListener {
             firebaseRepo.deslogar()
-            val intent = Intent(this, LoginActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            val intent = Intent(this, LoginActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            }
             startActivity(intent)
+            finish()
+        }
+
+        btnVoltar.setOnClickListener {
             finish()
         }
     }

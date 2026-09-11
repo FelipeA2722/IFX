@@ -1,70 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F3F6FF"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
     android:padding="24dp">
 
-    <!-- Imagem de Perfil -->
     <ImageView
-        android:id="@+id/imgFotoPerfil"
+        android:id="@+id/imgPerfilFoto"
         android:layout_width="120dp"
         android:layout_height="120dp"
+        android:layout_marginTop="24dp"
+        android:background="#E8EEF9"
+        android:padding="12dp"
         android:scaleType="centerCrop"
-        android:src="@android:drawable/ic_menu_gallery"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp" />
+        android:src="@android:drawable/ic_menu_gallery" />
 
-    <!-- Nome do Usuário -->
     <TextView
-        android:id="@+id/tvNomePerfil"
+        android:id="@+id/tvPerfilNome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
         android:text="Carregando..."
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/imgFotoPerfil"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        android:textColor="#1F2A44"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
-    <!-- E-mail do Usuário -->
     <TextView
-        android:id="@+id/tvEmailPerfil"
+        android:id="@+id/tvPerfilEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="Carregando..."
-        android:textSize="16sp"
-        android:textColor="@android:color/darker_gray"
-        app:layout_constraintTop_toBottomOf="@id/tvNomePerfil"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp" />
+        android:textColor="#5B6476"
+        android:textSize="16sp" />
 
-    <!-- Botão Gerenciar Meus Anúncios -->
     <Button
-        android:id="@+id/btnPerfilMeusAnuncios"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:id="@+id/btnMeusFavoritos"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
         android:layout_marginTop="32dp"
-        android:text="Gerenciar Meus Anúncios"
-        app:layout_constraintTop_toBottomOf="@id/tvEmailPerfil"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:background="@drawable/bg_button_primary"
+        android:text="Meus Favoritos"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
 
-    <!-- Botão Sair -->
     <Button
-        android:id="@+id/btnSair"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:id="@+id/btnDeslogar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg_button_secondary"
         android:text="Sair da Conta"
-        android:backgroundTint="@android:color/holo_red_light"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="24dp" />
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:id="@+id/btnVoltarPerfil"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg_button_secondary"
+        android:text="Voltar"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+
+</LinearLayout>

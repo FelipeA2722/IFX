@@ -52,6 +52,9 @@
             android:exported="false"/>
         <activity android:name=".FormularioAnuncioActivity"
             android:exported="false" />
+        <activity
+            android:name=".FavoritosActivity"
+            android:exported="false" />
 
     </application>
 

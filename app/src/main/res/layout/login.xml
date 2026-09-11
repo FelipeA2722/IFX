@@ -4,85 +4,91 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F3F6FF"
     android:padding="24dp">
 
-    <!-- Título do App -->
     <TextView
         android:id="@+id/tvTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
         android:text="IFX"
-        android:textSize="36sp"
+        android:textColor="#1F2A44"
+        android:textSize="38sp"
         android:textStyle="bold"
-        android:textColor="@android:color/holo_blue_dark"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="64dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Subtítulo -->
     <TextView
         android:id="@+id/tvSubtitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="Acesse sua conta para continuar"
+        android:textColor="#5B6476"
         android:textSize="16sp"
-        android:textColor="@android:color/darker_gray"
-        app:layout_constraintTop_toBottomOf="@id/tvTitulo"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitulo" />
 
-    <!-- Campo E-mail -->
     <EditText
         android:id="@+id/etEmail"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/bg_input"
         android:hint="E-mail"
         android:inputType="textEmailAddress"
-        android:minHeight="48dp"
-        app:layout_constraintTop_toBottomOf="@id/tvSubtitulo"
-        app:layout_constraintStart_toStartOf="parent"
+        android:paddingHorizontal="16dp"
+        android:textColor="#1F2A44"
+        android:textColorHint="#8C96A8"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="48dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSubtitulo" />
 
-    <!-- Campo Senha -->
     <EditText
         android:id="@+id/etSenha"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_input"
         android:hint="Senha"
         android:inputType="textPassword"
-        android:minHeight="48dp"
-        app:layout_constraintTop_toBottomOf="@id/etEmail"
-        app:layout_constraintStart_toStartOf="parent"
+        android:paddingHorizontal="16dp"
+        android:textColor="#1F2A44"
+        android:textColorHint="#8C96A8"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etEmail" />
 
-    <!-- Botão Entrar -->
     <Button
         android:id="@+id/btnEntrar"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/bg_button_primary"
         android:text="Entrar"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/etSenha"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etSenha" />
 
-    <!-- Botão Ir para Cadastro -->
     <TextView
         android:id="@+id/tvIrParaCadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Não tem uma conta? Cadastre-se"
-        android:textColor="@android:color/holo_blue_dark"
-        android:textSize="14sp"
+        android:layout_marginTop="18dp"
         android:padding="8dp"
-        app:layout_constraintTop_toBottomOf="@id/btnEntrar"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="Não tem uma conta? Cadastre-se"
+        android:textColor="#1E88E5"
+        android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnEntrar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

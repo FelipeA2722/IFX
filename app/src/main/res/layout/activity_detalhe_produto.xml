@@ -2,73 +2,70 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <ImageView
-            android:id="@+id/imgDetalheAnuncio"
+            android:id="@+id/imgDetalheFoto"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:scaleType="centerCrop" />
+            android:layout_height="250dp"
+            android:scaleType="centerCrop"
+            android:src="@android:drawable/ic_menu_gallery" />
 
         <TextView
             android:id="@+id/tvDetalheTitulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:textSize="20sp"
+            android:layout_marginTop="16dp"
+            android:text="Título do Produto"
+            android:textSize="22sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvDetalhePreco"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:textColor="#2E7D32"
-            android:textSize="18sp"
+            android:layout_marginTop="8dp"
+            android:text="R$ 0,00"
+            android:textColor="#008000"
+            android:textSize="20sp"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvDetalheCategoria"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Categoria: Geral"
+            android:textColor="#757575"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/tvDetalheDescricao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textSize="14sp" />
+            android:layout_marginTop="16dp"
+            android:text="Descrição detalhada do produto."
+            android:textSize="16sp" />
 
-        <LinearLayout
+        <Button
+            android:id="@+id/btnFavoritar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btnEditar"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginEnd="4dp"
-                android:text="Editar" />
-
-            <Button
-                android:id="@+id/btnExcluir"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginStart="4dp"
-                android:backgroundTint="#D32F2F"
-                android:text="Excluir" />
-        </LinearLayout>
+            android:layout_marginTop="24dp"
+            android:text="FAVORITAR" />
 
         <Button
             android:id="@+id/btnVoltarDetalhe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Voltar" />
+            android:text="VOLTAR" />
 
     </LinearLayout>
 </ScrollView>

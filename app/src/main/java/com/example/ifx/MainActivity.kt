@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
     private lateinit var svPesquisa: SearchView
     private lateinit var spFiltroCategoria: Spinner
 
-    private var adapter: AnuncioAdapter? = null
+    private var adapter: MeuAnuncioAdapter? = null
     private val categoriasFiltro = listOf("Todas", "Geral", "Eletrônicos", "Roupas", "Móveis", "Livros", "Esportes")
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,7 +79,7 @@ class MainActivity : ComponentActivity() {
     private fun carregarAnuncios() {
         firebaseRepo.buscarTodosAnuncios(
             onSucesso = { lista ->
-                adapter = AnuncioAdapter(lista) { anuncioClicado ->
+                adapter = MeuAnuncioAdapter(lista) { anuncioClicado ->
                     val intent = Intent(this, DetalheProdutoActivity::class.java).apply {
                         putExtra("ANUNCIO_ID", anuncioClicado["id"] as? String ?: "")
                         putExtra("TITULO", anuncioClicado["titulo"] as? String ?: "")

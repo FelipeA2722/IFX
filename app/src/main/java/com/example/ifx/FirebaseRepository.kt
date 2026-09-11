@@ -173,4 +173,87 @@ class FirebaseRepository {
                 onErro(e.message ?: "Erro ao buscar anúncios")
             }
     }
+
+    // --- MÓDULO DE FAVORITOS (SPRINT 2) ---
+
+    fun favoritarAnuncio(
+        anuncioId: String,
+        onSucesso: () -> Unit,
+        onErro: (String) -> Unit
+    ) {
+        val uid = usuarioAtualId ?: return onErro("Usuário não logado")
+        val favId = "${uid}_$anuncioId"
+
+        val dados = hashMapOf(
+            "usuarioId" to uid,
+            "anuncioId" to anuncioId,
+            "criadoEm" to Timestamp.now()
+        )
+
+        db.collection("favoritos").document(favId)
+            .set(dados)
+            .addOnSuccessListener { onSucesso() }
+            .addOnFailureListener { e -> onErro(e.message ?: "Erro ao favoritar") }
+    }
+
+    fun desfavoritarAnuncio(
+        anuncioId: String,
+        onSucesso: () -> Unit,
+        onErro: (String) -> Unit
+    ) {
+        val uid = usuarioAtualId ?: return onErro("Usuário não logado")
+        val favId = "${uid}_$anuncioId"
+
+        db.collection("favoritos").document(favId)
+            .delete()
+            .addOnSuccessListener { onSucesso() }
+            .addOnFailureListener { e -> onErro(e.message ?: "Erro ao desfavoritar") }
+    }
+
+    fun verificarSeEFavorito(
+        anuncioId: String,
+        onResultado: (Boolean) -> Unit
+    ) {
+        val uid = usuarioAtualId ?: return onResultado(false)
+        val favId = "${uid}_$anuncioId"
+
+        db.collection("favoritos").document(favId)
+            .get()
+            .addOnSuccessListener { doc ->
+                onResultado(doc.exists())
+            }
+            .addOnFailureListener {
+                onResultado(false)
+            }
+    }
+
+    fun buscarMeusFavoritos(
+        onSucesso: (List<Map<String, Any>>) -> Unit,
+        onErro: (String) -> Unit
+    ) {
+        val uid = usuarioAtualId ?: return onErro("Usuário não logado")
+
+        db.collection("favoritos")
+            .whereEqualTo("usuarioId", uid)
+            .get()
+            .addOnSuccessListener { favSnapshots ->
+                val idsAnuncios = favSnapshots.documents.mapNotNull { it.getString("anuncioId") }
+
+                if (idsAnuncios.isEmpty()) {
+                    onSucesso(emptyList())
+                    return@addOnSuccessListener
+                }
+
+                db.collection("anuncios")
+                    .get()
+                    .addOnSuccessListener { anunciosSnapshots ->
+                        val listaAnuncios = anunciosSnapshots.documents
+                            .mapNotNull { it.data }
+                            .filter { idsAnuncios.contains(it["id"] as? String) }
+                        onSucesso(listaAnuncios)
+                    }
+                    .addOnFailureListener { e -> onErro(e.message ?: "Erro ao carregar anúncios favoritos") }
+            }
+            .addOnFailureListener { e -> onErro(e.message ?: "Erro ao buscar favoritos") }
+    }
 }

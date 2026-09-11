@@ -2,6 +2,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F3F6FF"
+    android:fillViewport="true"
     android:padding="16dp">
 
     <LinearLayout
@@ -9,57 +11,80 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Novo Anúncio"
+            android:textColor="#1F2A44"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
         <EditText
             android:id="@+id/etTitulo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_input"
             android:hint="Título do Anúncio"
-            android:inputType="text" />
+            android:inputType="text"
+            android:paddingHorizontal="16dp" />
 
         <EditText
             android:id="@+id/etPreco"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_height="56dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_input"
             android:hint="Preço (Ex: 99.90)"
-            android:inputType="numberDecimal" />
+            android:inputType="numberDecimal"
+            android:paddingHorizontal="16dp" />
 
         <EditText
             android:id="@+id/etDescricao"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_height="120dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_input"
+            android:gravity="top|start"
             android:hint="Descrição"
             android:inputType="textMultiLine"
-            android:minLines="3" />
+            android:padding="16dp" />
 
         <EditText
             android:id="@+id/etFotoUrl"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_height="56dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_input"
             android:hint="URL da Imagem"
-            android:inputType="textUri" />
+            android:inputType="textUri"
+            android:paddingHorizontal="16dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginBottom="6dp"
             android:text="Selecione a Categoria:"
+            android:textColor="#1F2A44"
             android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/spCategoria"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp" />
+            android:layout_height="48dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/bg_input" />
 
         <Button
             android:id="@+id/btnSalvar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Salvar Anúncio" />
+            android:layout_height="56dp"
+            android:background="@drawable/bg_button_primary"
+            android:text="Salvar Anúncio"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
 
     </LinearLayout>
 </ScrollView>

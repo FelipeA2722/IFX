@@ -4,77 +4,94 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F3F6FF"
     android:padding="24dp">
 
     <TextView
         android:id="@+id/tvTituloCadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:text="Criar Conta"
-        android:textSize="28sp"
+        android:textColor="#1F2A44"
+        android:textSize="30sp"
         android:textStyle="bold"
-        android:textColor="@android:color/holo_blue_dark"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="32dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/etNomeCadastro"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/bg_input"
         android:hint="Nome Completo"
         android:inputType="textPersonName"
-        android:minHeight="48dp"
-        app:layout_constraintTop_toBottomOf="@id/tvTituloCadastro"
-        app:layout_constraintStart_toStartOf="parent"
+        android:paddingHorizontal="16dp"
+        android:textColor="#1F2A44"
+        android:textColorHint="#8C96A8"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTituloCadastro" />
 
     <EditText
         android:id="@+id/etEmailCadastro"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_input"
         android:hint="E-mail"
         android:inputType="textEmailAddress"
-        android:minHeight="48dp"
-        app:layout_constraintTop_toBottomOf="@id/etNomeCadastro"
-        app:layout_constraintStart_toStartOf="parent"
+        android:paddingHorizontal="16dp"
+        android:textColor="#1F2A44"
+        android:textColorHint="#8C96A8"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etNomeCadastro" />
 
     <EditText
         android:id="@+id/etSenhaCadastro"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Senha (mínimo 6 caracteres)"
+        android:layout_height="56dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_input"
+        android:hint="Senha (mínimo 6)"
         android:inputType="textPassword"
-        android:minHeight="48dp"
-        app:layout_constraintTop_toBottomOf="@id/etEmailCadastro"
-        app:layout_constraintStart_toStartOf="parent"
+        android:paddingHorizontal="16dp"
+        android:textColor="#1F2A44"
+        android:textColorHint="#8C96A8"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etEmailCadastro" />
 
     <EditText
         android:id="@+id/etFotoUrlCadastro"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="URL da Foto de Perfil (Opcional)"
+        android:layout_height="56dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_input"
+        android:hint="URL da Foto de Perfil"
         android:inputType="textUri"
-        android:minHeight="48dp"
-        app:layout_constraintTop_toBottomOf="@id/etSenhaCadastro"
-        app:layout_constraintStart_toStartOf="parent"
+        android:paddingHorizontal="16dp"
+        android:textColor="#1F2A44"
+        android:textColorHint="#8C96A8"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etSenhaCadastro" />
 
     <Button
         android:id="@+id/btnCadastrarUsuario"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/bg_button_primary"
         android:text="Cadastrar"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/etFotoUrlCadastro"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etFotoUrlCadastro" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
