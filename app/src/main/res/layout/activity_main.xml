@@ -3,57 +3,71 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="16dp">
 
-    <!-- Container com botões de navegação rápida -->
+    <!-- Navegação Superior -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/btnNavCadastrarAnuncio"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="2dp"
             android:layout_weight="1"
-            android:text="+ Anunciar"
-            android:textSize="11sp" />
+            android:text="Cadastrar" />
 
         <Button
             android:id="@+id/btnNavMeusAnuncios"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="2dp"
             android:layout_weight="1"
-            android:backgroundTint="#616161"
-            android:text="Meus Anúncios"
-            android:textSize="11sp" />
+            android:text="Meus Anúncios" />
 
         <Button
             android:id="@+id/btnNavPerfil"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
             android:layout_weight="1"
-            android:backgroundTint="#4CAF50"
-            android:text="Perfil"
-            android:textSize="11sp" />
+            android:text="Perfil" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tvTituloMain"
-        android:layout_width="wrap_content"
+    <!-- Barra de Pesquisa -->
+    <SearchView
+        android:id="@+id/svPesquisa"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="Produtos em Destaque"
-        android:textSize="22sp"
-        android:textStyle="bold" />
+        android:layout_marginTop="8dp"
+        android:iconifiedByDefault="false"
+        android:queryHint="Buscar produto..." />
 
+    <!-- Filtro de Categoria -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Categoria: "
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/spFiltroCategoria"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <!-- Lista de Produtos -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvAnuncios"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1" />
 
 </LinearLayout>

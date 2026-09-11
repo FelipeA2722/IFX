@@ -20,6 +20,7 @@ class MeuAnuncioAdapter(
         val tvTitulo: TextView = itemView.findViewById(R.id.tvMeuItemTitulo)
         val tvPreco: TextView = itemView.findViewById(R.id.tvMeuItemPreco)
         val tvDescricao: TextView = itemView.findViewById(R.id.tvMeuItemDescricao)
+        val tvCategoria: TextView? = itemView.findViewById(R.id.tvMeuItemCategoria)
         val btnEditar: Button = itemView.findViewById(R.id.btnEditarAnuncio)
         val btnExcluir: Button = itemView.findViewById(R.id.btnExcluirAnuncio)
     }
@@ -34,13 +35,15 @@ class MeuAnuncioAdapter(
         val anuncio = listaAnuncios[position]
 
         val titulo = anuncio["titulo"] as? String ?: "Sem título"
-        val preco = anuncio["preco"] as? Double ?: 0.0
+        val preco = (anuncio["preco"] as? Number)?.toDouble() ?: 0.0
         val descricao = anuncio["descricao"] as? String ?: ""
+        val categoria = anuncio["categoria"] as? String ?: "Geral"
         val fotoUrl = (anuncio["fotoUrl"] as? String)?.trim() ?: ""
 
         holder.tvTitulo.text = titulo
         holder.tvPreco.text = String.format("R$ %.2f", preco)
         holder.tvDescricao.text = descricao
+        holder.tvCategoria?.text = categoria
 
         holder.imgItem.load(fotoUrl.ifEmpty { null }) {
             crossfade(true)

@@ -58,6 +58,21 @@
             android:inputType="textUri"
             android:minHeight="48dp" />
 
+        <!-- Rótulo e Spinner da Categoria -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="Categoria:"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/spCategoria"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:minHeight="48dp" />
+
         <ImageView
             android:id="@+id/imgEditarPreviaAnuncio"
             android:layout_width="match_parent"

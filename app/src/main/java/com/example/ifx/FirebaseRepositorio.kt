@@ -12,10 +12,6 @@ class FirebaseRepository {
 
     val usuarioAtualId: String? get() = auth.currentUser?.uid
 
-    // ==========================================
-    // 1. AUTENTICAÇÃO E PERFIL
-    // ==========================================
-
     fun cadastrarUsuario(
         email: String,
         senha: String,
@@ -81,16 +77,12 @@ class FirebaseRepository {
         auth.signOut()
     }
 
-    // ==========================================
-    // 2. CRUD DE ANÚNCIOS (CADASTRAR, EDITAR, EXCLUIR)
-    // ==========================================
-
-    // Criar um anúncio novo
     fun cadastrarAnuncio(
         titulo: String,
         descricao: String,
         preco: Double,
         fotoUrl: String,
+        categoria: String,
         onSucesso: () -> Unit,
         onErro: (String) -> Unit
     ) {
@@ -104,6 +96,7 @@ class FirebaseRepository {
             "descricao" to descricao,
             "preco" to preco,
             "fotoUrl" to fotoUrl.trim(),
+            "categoria" to categoria,
             "criadoEm" to Timestamp.now()
         )
 
@@ -113,13 +106,13 @@ class FirebaseRepository {
             .addOnFailureListener { e -> onErro(e.message ?: "Erro ao salvar anúncio") }
     }
 
-    // Atualizar um anúncio existente
     fun editarAnuncio(
         anuncioId: String,
         titulo: String,
         descricao: String,
         preco: Double,
         fotoUrl: String,
+        categoria: String,
         onSucesso: () -> Unit,
         onErro: (String) -> Unit
     ) {
@@ -127,7 +120,8 @@ class FirebaseRepository {
             "titulo" to titulo,
             "descricao" to descricao,
             "preco" to preco,
-            "fotoUrl" to fotoUrl.trim()
+            "fotoUrl" to fotoUrl.trim(),
+            "categoria" to categoria
         )
 
         db.collection("anuncios").document(anuncioId)
@@ -136,7 +130,6 @@ class FirebaseRepository {
             .addOnFailureListener { e -> onErro(e.message ?: "Erro ao atualizar anúncio") }
     }
 
-    // Deletar um anúncio
     fun excluirAnuncio(
         anuncioId: String,
         onSucesso: () -> Unit,
@@ -147,10 +140,6 @@ class FirebaseRepository {
             .addOnSuccessListener { onSucesso() }
             .addOnFailureListener { e -> onErro("Erro ao excluir: ${e.message}") }
     }
-
-    // ==========================================
-    // 3. CONSULTAS DE ANÚNCIOS
-    // ==========================================
 
     fun buscarMeusAnuncios(
         onSucesso: (List<Map<String, Any>>) -> Unit,

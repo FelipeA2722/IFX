@@ -37,17 +37,16 @@ class MeusAnunciosActivity : ComponentActivity() {
                         val intent = Intent(this, EditarAnuncioActivity::class.java).apply {
                             putExtra("ANUNCIO_ID", id)
                             putExtra("TITULO", anuncio["titulo"] as? String ?: "")
-                            putExtra("PRECO", anuncio["preco"] as? Double ?: 0.0)
+                            putExtra("PRECO", (anuncio["preco"] as? Number)?.toDouble() ?: 0.0)
                             putExtra("DESCRICAO", anuncio["descricao"] as? String ?: "")
                             putExtra("FOTO_URL", anuncio["fotoUrl"] as? String ?: "")
+                            putExtra("CATEGORIA", anuncio["categoria"] as? String ?: "Geral")
                         }
                         startActivity(intent)
                     },
                     onExcluirClick = { anuncio ->
                         val id = anuncio["id"] as? String ?: ""
-                        if (id.isNotEmpty()) {
-                            excluirAnuncio(id)
-                        }
+                        if (id.isNotEmpty()) excluirAnuncio(id)
                     }
                 )
             },

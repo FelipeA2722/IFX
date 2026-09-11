@@ -1,17 +1,20 @@
 package com.example.ifx
 
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.core.widget.doAfterTextChanged
 import coil.load
 
-class CadastrarAnuncioActivity : androidx.activity.ComponentActivity() {
+class CadastrarAnuncioActivity : ComponentActivity() {
 
     private val firebaseRepo = FirebaseRepository()
+    private val categoriasLista = listOf("Geral", "Eletrônicos", "Roupas", "Móveis", "Livros", "Esportes")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,11 +24,15 @@ class CadastrarAnuncioActivity : androidx.activity.ComponentActivity() {
         val etPreco = findViewById<EditText>(R.id.etPrecoAnuncio)
         val etDescricao = findViewById<EditText>(R.id.etDescricaoAnuncio)
         val etFotoUrl = findViewById<EditText>(R.id.etFotoUrlAnuncio)
+        val spCategoria = findViewById<Spinner>(R.id.spCategoria)
         val imgPrevia = findViewById<ImageView>(R.id.imgPreviaAnuncio)
         val btnCadastrar = findViewById<Button>(R.id.btnCadastrarAnuncio)
         val btnCancelar = findViewById<Button>(R.id.btnCancelarAnuncio)
 
-        // Atualiza a imagem de prévia dinamicamente ao digitar a URL
+        val adapterCategorias = ArrayAdapter(this, android.R.layout.simple_spinner_item, categoriasLista)
+        adapterCategorias.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spCategoria.adapter = adapterCategorias
+
         etFotoUrl.doAfterTextChanged { text ->
             val url = text?.toString()?.trim() ?: ""
             imgPrevia.load(url.ifEmpty { null }) {
@@ -35,14 +42,13 @@ class CadastrarAnuncioActivity : androidx.activity.ComponentActivity() {
             }
         }
 
-        // Ação do botão Cadastrar Anúncio
         btnCadastrar.setOnClickListener {
             val titulo = etTitulo.text.toString().trim()
             val precoString = etPreco.text.toString().trim()
             val descricao = etDescricao.text.toString().trim()
             val fotoUrl = etFotoUrl.text.toString().trim()
+            val categoria = spCategoria.selectedItem.toString()
 
-            // Validação simples dos campos
             if (titulo.isEmpty() || precoString.isEmpty() || descricao.isEmpty() || fotoUrl.isEmpty()) {
                 Toast.makeText(this, "Preencha todos os campos!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
@@ -54,18 +60,17 @@ class CadastrarAnuncioActivity : androidx.activity.ComponentActivity() {
                 return@setOnClickListener
             }
 
-            // Desabilita o botão para evitar múltiplos cliques seguidos
             btnCadastrar.isEnabled = false
 
-            // Envia para o Firebase
             firebaseRepo.cadastrarAnuncio(
                 titulo = titulo,
                 descricao = descricao,
                 preco = preco,
                 fotoUrl = fotoUrl,
+                categoria = categoria,
                 onSucesso = {
                     Toast.makeText(this, "Anúncio cadastrado com sucesso!", Toast.LENGTH_SHORT).show()
-                    finish() // Fecha a Activity e volta para a tela anterior
+                    finish()
                 },
                 onErro = { mensagem ->
                     btnCadastrar.isEnabled = true
@@ -74,7 +79,6 @@ class CadastrarAnuncioActivity : androidx.activity.ComponentActivity() {
             )
         }
 
-        // Ação do botão Cancelar
         btnCancelar.setOnClickListener {
             finish()
         }

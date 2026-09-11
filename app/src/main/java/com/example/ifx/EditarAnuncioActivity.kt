@@ -1,9 +1,11 @@
 package com.example.ifx
 
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.core.widget.doAfterTextChanged
@@ -13,6 +15,7 @@ class EditarAnuncioActivity : androidx.activity.ComponentActivity() {
 
     private val firebaseRepo = FirebaseRepository()
     private var anuncioId: String = ""
+    private val categoriasLista = listOf("Geral", "Eletrônicos", "Roupas", "Móveis", "Livros", "Esportes")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,11 +25,17 @@ class EditarAnuncioActivity : androidx.activity.ComponentActivity() {
         val etPreco = findViewById<EditText>(R.id.etEditarPrecoAnuncio)
         val etDescricao = findViewById<EditText>(R.id.etEditarDescricaoAnuncio)
         val etFotoUrl = findViewById<EditText>(R.id.etEditarFotoUrlAnuncio)
+        val spCategoria = findViewById<Spinner>(R.id.spCategoria)
         val imgPrevia = findViewById<ImageView>(R.id.imgEditarPreviaAnuncio)
         val btnSalvar = findViewById<Button>(R.id.btnSalvarEdicaoAnuncio)
         val btnCancelar = findViewById<Button>(R.id.btnCancelarEdicaoAnuncio)
 
-        // Recebe os dados enviados pela MeusAnunciosActivity
+        // Configura o Spinner de categorias
+        val adapterCategorias = ArrayAdapter(this, android.R.layout.simple_spinner_item, categoriasLista)
+        adapterCategorias.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spCategoria.adapter = adapterCategorias
+
+        // Recebe os dados enviados
         anuncioId = intent.getStringExtra("ANUNCIO_ID") ?: ""
         etTitulo.setText(intent.getStringExtra("TITULO") ?: "")
 
@@ -36,6 +45,12 @@ class EditarAnuncioActivity : androidx.activity.ComponentActivity() {
         etDescricao.setText(intent.getStringExtra("DESCRICAO") ?: "")
         val fotoUrlInicial = intent.getStringExtra("FOTO_URL") ?: ""
         etFotoUrl.setText(fotoUrlInicial)
+
+        val categoriaAntiga = intent.getStringExtra("CATEGORIA") ?: "Geral"
+        val posicaoCategoria = categoriasLista.indexOf(categoriaAntiga)
+        if (posicaoCategoria >= 0) {
+            spCategoria.setSelection(posicaoCategoria)
+        }
 
         // Carrega a imagem prévia inicial
         imgPrevia.load(fotoUrlInicial.ifEmpty { null }) {
@@ -60,6 +75,7 @@ class EditarAnuncioActivity : androidx.activity.ComponentActivity() {
             val precoString = etPreco.text.toString().trim()
             val novaDescricao = etDescricao.text.toString().trim()
             val novaFotoUrl = etFotoUrl.text.toString().trim()
+            val novaCategoria = spCategoria.selectedItem.toString()
 
             if (novoTitulo.isEmpty() || precoString.isEmpty() || novaDescricao.isEmpty() || novaFotoUrl.isEmpty()) {
                 Toast.makeText(this, "Preencha todos os campos!", Toast.LENGTH_SHORT).show()
@@ -80,6 +96,7 @@ class EditarAnuncioActivity : androidx.activity.ComponentActivity() {
                 descricao = novaDescricao,
                 preco = novoPreco,
                 fotoUrl = novaFotoUrl,
+                categoria = novaCategoria,
                 onSucesso = {
                     Toast.makeText(this, "Anúncio atualizado com sucesso!", Toast.LENGTH_SHORT).show()
                     finish()

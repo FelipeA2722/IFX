@@ -9,15 +9,17 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 
 class AnuncioAdapter(
-    private val listaAnuncios: List<Map<String, Any>>,
+    private var listaOriginal: List<Map<String, Any>>,
     private val onItemClick: (Map<String, Any>) -> Unit
 ) : RecyclerView.Adapter<AnuncioAdapter.AnuncioViewHolder>() {
 
-    class AnuncioViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val imgItem: ImageView = itemView.findViewById(R.id.imgItemAnuncio)
-        val tvTitulo: TextView = itemView.findViewById(R.id.tvItemTitulo)
-        val tvPreco: TextView = itemView.findViewById(R.id.tvItemPreco)
-        val tvDescricao: TextView = itemView.findViewById(R.id.tvItemDescricao)
+    private var listaFiltrada: List<Map<String, Any>> = listaOriginal
+
+    class AnuncioViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val imgFoto: ImageView = view.findViewById(R.id.imgItemAnuncio)
+        val tvTitulo: TextView = view.findViewById(R.id.tvItemTitulo)
+        val tvPreco: TextView = view.findViewById(R.id.tvItemPreco)
+        val tvCategoria: TextView? = view.findViewById(R.id.tvItemCategoria)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnuncioViewHolder {
@@ -27,29 +29,43 @@ class AnuncioAdapter(
     }
 
     override fun onBindViewHolder(holder: AnuncioViewHolder, position: Int) {
-        val anuncio = listaAnuncios[position]
+        val anuncio = listaFiltrada[position]
 
-        val titulo = anuncio["titulo"] as? String ?: "Sem título"
-        val preco = anuncio["preco"] as? Double ?: 0.0
-        val descricao = anuncio["descricao"] as? String ?: ""
-        val fotoUrl = (anuncio["fotoUrl"] as? String)?.trim() ?: ""
+        holder.tvTitulo.text = anuncio["titulo"] as? String ?: "Sem título"
 
-        holder.tvTitulo.text = titulo
+        val preco = (anuncio["preco"] as? Number)?.toDouble() ?: 0.0
         holder.tvPreco.text = String.format("R$ %.2f", preco)
-        holder.tvDescricao.text = descricao
 
-        // Carrega a imagem com Coil
-        holder.imgItem.load(fotoUrl.ifEmpty { null }) {
+        holder.tvCategoria?.text = anuncio["categoria"] as? String ?: "Geral"
+
+        val fotoUrl = (anuncio["fotoUrl"] as? String)?.trim() ?: ""
+        holder.imgFoto.load(fotoUrl.ifEmpty { null }) {
             crossfade(true)
             placeholder(android.R.drawable.ic_menu_gallery)
             error(android.R.drawable.ic_menu_report_image)
         }
 
-        // Clique no item do card
-        holder.itemView.setOnClickListener {
-            onItemClick(anuncio)
-        }
+        holder.itemView.setOnClickListener { onItemClick(anuncio) }
     }
 
-    override fun getItemCount(): Int = listaAnuncios.size
+    override fun getItemCount(): Int = listaFiltrada.size
+
+    fun aplicarFiltro(textoBusca: String, categoriaSelecionada: String) {
+        listaFiltrada = listaOriginal.filter { anuncio ->
+            val titulo = (anuncio["titulo"] as? String ?: "").lowercase()
+            val categoria = anuncio["categoria"] as? String ?: "Geral"
+
+            val bateTexto = titulo.contains(textoBusca.lowercase().trim())
+            val bateCategoria = categoriaSelecionada == "Todas" || categoria.equals(categoriaSelecionada, ignoreCase = true)
+
+            bateTexto && bateCategoria
+        }
+        notifyDataSetChanged()
+    }
+
+    fun atualizarLista(novaLista: List<Map<String, Any>>) {
+        listaOriginal = novaLista
+        listaFiltrada = novaLista
+        notifyDataSetChanged()
+    }
 }
