@@ -44,6 +44,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="8dp" />
 
+    <!-- Botão Gerenciar Meus Anúncios -->
+    <Button
+        android:id="@+id/btnPerfilMeusAnuncios"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Gerenciar Meus Anúncios"
+        app:layout_constraintTop_toBottomOf="@id/tvEmailPerfil"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <!-- Botão Sair -->
     <Button
         android:id="@+id/btnSair"

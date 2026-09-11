@@ -61,7 +61,7 @@ class FirebaseRepository {
             .addOnSuccessListener { onSucesso() }
             .addOnFailureListener { e -> onErro(e.message ?: "Erro ao salvar perfil") }
     }
-    // Busca os dados do usuário atual no Firestore
+
     fun buscarPerfilUsuario(onSucesso: (Map<String, Any>?) -> Unit, onErro: (String) -> Unit) {
         val uid = usuarioAtualId ?: return onErro("Usuário não logado")
 
@@ -77,15 +77,15 @@ class FirebaseRepository {
             .addOnFailureListener { e -> onErro(e.message ?: "Erro ao buscar perfil") }
     }
 
-    // Desloga o usuário do Firebase
     fun deslogar() {
         auth.signOut()
     }
 
     // ==========================================
-    // 2. CRUD DE ANÚNCIOS
+    // 2. CRUD DE ANÚNCIOS (CADASTRAR, EDITAR, EXCLUIR)
     // ==========================================
 
+    // Criar um anúncio novo
     fun cadastrarAnuncio(
         titulo: String,
         descricao: String,
@@ -113,6 +113,7 @@ class FirebaseRepository {
             .addOnFailureListener { e -> onErro(e.message ?: "Erro ao salvar anúncio") }
     }
 
+    // Atualizar um anúncio existente
     fun editarAnuncio(
         anuncioId: String,
         titulo: String,
@@ -126,15 +127,16 @@ class FirebaseRepository {
             "titulo" to titulo,
             "descricao" to descricao,
             "preco" to preco,
-            "fotoUrl" to fotoUrl
+            "fotoUrl" to fotoUrl.trim()
         )
 
         db.collection("anuncios").document(anuncioId)
             .update(atualizacoes)
             .addOnSuccessListener { onSucesso() }
-            .addOnFailureListener { e -> onErro(e.message ?: "Erro ao atualizar") }
+            .addOnFailureListener { e -> onErro(e.message ?: "Erro ao atualizar anúncio") }
     }
 
+    // Deletar um anúncio
     fun excluirAnuncio(
         anuncioId: String,
         onSucesso: () -> Unit,
@@ -144,5 +146,42 @@ class FirebaseRepository {
             .delete()
             .addOnSuccessListener { onSucesso() }
             .addOnFailureListener { e -> onErro("Erro ao excluir: ${e.message}") }
+    }
+
+    // ==========================================
+    // 3. CONSULTAS DE ANÚNCIOS
+    // ==========================================
+
+    fun buscarMeusAnuncios(
+        onSucesso: (List<Map<String, Any>>) -> Unit,
+        onErro: (String) -> Unit
+    ) {
+        val uid = usuarioAtualId ?: return onErro("Usuário não logado")
+
+        db.collection("anuncios")
+            .whereEqualTo("usuarioId", uid)
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                val lista = querySnapshot.documents.mapNotNull { it.data }
+                onSucesso(lista)
+            }
+            .addOnFailureListener { e ->
+                onErro(e.message ?: "Erro ao buscar meus anúncios")
+            }
+    }
+
+    fun buscarTodosAnuncios(
+        onSucesso: (List<Map<String, Any>>) -> Unit,
+        onErro: (String) -> Unit
+    ) {
+        db.collection("anuncios")
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                val lista = querySnapshot.documents.mapNotNull { it.data }
+                onSucesso(lista)
+            }
+            .addOnFailureListener { e ->
+                onErro(e.message ?: "Erro ao buscar anúncios")
+            }
     }
 }

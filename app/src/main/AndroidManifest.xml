@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -12,6 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.IFX">
+
+        <!-- Tela Inicial de Login -->
         <activity
             android:name=".LoginActivity"
             android:exported="true"
@@ -20,18 +23,34 @@
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Telas de Autenticação e Perfil -->
         <activity
             android:name=".CadastroActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+        <activity
+            android:name=".PerfilActivity"
+            android:exported="false" />
 
-        <activity android:name=".PerfilActivity"
+        <!-- Telas de Gerenciamento de Anúncios (Sprint 1) -->
+        <activity
+            android:name=".CadastrarAnuncioActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MeusAnunciosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditarAnuncioActivity"
+            android:exported="false" />
+        <activity android:name=".DetalheProdutoActivity"
+            android:exported="false"/>
+        <activity android:name=".FormularioAnuncioActivity"
             android:exported="false" />
 
     </application>

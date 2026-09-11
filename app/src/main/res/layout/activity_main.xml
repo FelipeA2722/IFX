@@ -2,32 +2,58 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="8dp">
+
+    <!-- Container com botões de navegação rápida -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnNavCadastrarAnuncio"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:layout_weight="1"
+            android:text="+ Anunciar"
+            android:textSize="11sp" />
+
+        <Button
+            android:id="@+id/btnNavMeusAnuncios"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="2dp"
+            android:layout_weight="1"
+            android:backgroundTint="#616161"
+            android:text="Meus Anúncios"
+            android:textSize="11sp" />
+
+        <Button
+            android:id="@+id/btnNavPerfil"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_weight="1"
+            android:backgroundTint="#4CAF50"
+            android:text="Perfil"
+            android:textSize="11sp" />
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/tvBoasVindas"
+        android:id="@+id/tvTituloMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bem-vindo ao IFX!"
+        android:layout_margin="8dp"
+        android:text="Produtos em Destaque"
         android:textSize="22sp"
         android:textStyle="bold" />
 
-    <!-- Botão para ir ao Perfil -->
-    <Button
-        android:id="@+id/btnPerfil"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Meu Perfil" />
-
-    <!-- Botão Sair da Conta -->
-    <Button
-        android:id="@+id/btnSair"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Sair da Conta" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvAnuncios"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>
